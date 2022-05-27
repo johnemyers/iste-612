@@ -9,7 +9,7 @@ output:
 ---
 
 # Introduction
-* Background of the situation.
+There has been a recent uptick in the conversations surrounding the notion of "Unidentified Flying Objects," or UFOs, in the media due to Congressional inquiries on the topic.  In 2001
 
 # Problem Description
 
@@ -21,4 +21,8 @@ output:
 
 ## Implementation
 
+We intend on leveraging XYZ libraries.
+
 # Test & Demonstration
+
+# References
