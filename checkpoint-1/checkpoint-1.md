@@ -13,15 +13,32 @@ There has been a recent uptick in the conversations surrounding the notion of "U
 
 # Problem Description
 
+
 # Software Development
 
 ## Requirements
 
+This tool will designed generically to accomdate any type of cache of FOIA-released documents from the government in PDF form.
+
 ## Design
+
+### Backend Importation Pipeline
+1. Documents will be parsed and imported
+1. Another thing
+1. A final step
+
+### Data Processing Pipeline
+
+1. K-Means Flat Clustering
+
+### Visualization Pipeline
+
+1. Word Cloud
+1. Histogram
 
 ## Implementation
 
-We intend on leveraging XYZ libraries.
+* Apache PDFBox
 
 # Test & Demonstration
 
