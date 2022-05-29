@@ -2,7 +2,7 @@
 title: "Checkpoint 1 - Team UFO"
 subtitle: "An Analysis of Declassified Government Documents"
 author: "Cory Maclauchlin, John Myers, Arivirku Thirugnanam"
-date: "5/31/2022"
+date: "6/3/2022"
 output: 
   pdf_document:
     latex_engine: xelatex
@@ -21,6 +21,10 @@ There has been a recent uptick in the conversations surrounding the notion of "U
 This tool will designed generically to accomdate any type of cache of FOIA-released documents from the government in PDF form.
 
 ## Design
+
+The overall architecture will be designed around three pipelines:
+
+![](architecture.png)
 
 ### Backend Importation Pipeline
 1. Documents will be parsed and imported
