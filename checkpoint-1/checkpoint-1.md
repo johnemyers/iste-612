@@ -13,12 +13,17 @@ There has been a recent uptick in the conversations surrounding the notion of "U
 
 # Problem Description
 
+When released, a trove of documents (with significant portions redacted) are published.
 
 # Software Development
 
+Our development methodology will rely on the tools of the trade for.  We have performed an initial survey of the requirements of the sytem, along with a design and implementation approach, which will now be discussed in more detail.
+
 ## Requirements
 
-This tool will designed generically to accomdate any type of cache of FOIA-released documents from the government in PDF form.
+This tool will designed generically to accommodate any type of cache of FOIA-released documents from the government in PDF form.
+
+There will be two primary user classes for the developed software.  The first user class is the data engineer who will set up the backend for.  The second user class is a person interesting in understanding.
 
 ## Design
 
