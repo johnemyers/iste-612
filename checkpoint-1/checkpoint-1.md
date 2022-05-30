@@ -1,29 +1,39 @@
+
 ---
 title: "Checkpoint 1 - Team UFO"
-subtitle: "An Analysis of Declassified Government Documents"
 author: "Cory Maclauchlin, John Myers, Arivirku Thirugnanam"
 date: "6/3/2022"
-output: 
+output:
   pdf_document:
     latex_engine: xelatex
+  html_document:
+    df_print: paged
+subtitle: An Analysis of Declassified Government Documents
 ---
+
+\vspace{-15truemm}
 
 # Introduction
 There has been a recent uptick in the conversations surrounding the notion of "Unidentified Flying Objects," or UFOs, in the media due to Congressional inquiries on the topic.  Freedom of Information Act (FOIA) request.
 
 # Problem Description
 
-When released, a trove of documents (with significant portions redacted) are published.
+Some of the technical challenges of this project include:
+
+* **Large Troves of Documents.**  When released, a trove of documents is published all at once.  These can include hundreds of PDFs with thousands of pages.  For this particular release, there are ### documents composed of ### pages.
+* **Data That is Dirty.** Documents that are released by the Government are scans of printed materials, with redactions made.  This is the ensure that nothing is accidentally revealed that isn't supposed to be, so a physical step is required in Government release procedures.  As such, any useful digital representation is obliterated.
+* **Unusual Lexicon.** A standard dictionary methodology may not be appropriate for certain documents types, especially this dataset.  The unusual lexicon will require an unsupervised approach to performing processing.
+* **One more thing.** This will be one more thing.
 
 # Software Development
 
-Our development methodology will rely on the tools of the trade for.  We have performed an initial survey of the requirements of the sytem, along with a design and implementation approach, which will now be discussed in more detail.
+Our development methodology will leverage on the tools of the trade for.  We have performed an initial survey of the requirements of the sytem, along with a design and implementation approach, which will now be discussed in more detail.
 
 ## Requirements
 
 This tool will designed generically to accommodate any type of cache of FOIA-released documents from the government in PDF form.
 
-There will be two primary user classes for the developed software.  The first user class is the data engineer who will set up the backend for.  The second user class is a person interesting in understanding.
+There will be two primary user classes for the developed software.  The first user class is the data engineer who will set up the backend for data processing, including administering parameters for the model generation steps.  The second user class is a person interested in understanding the document set, especially for finding the hidden patterns within the data.  In addition, this user class will leverage the clusters that have been exposed 
 
 ## Design
 
@@ -68,4 +78,6 @@ Once parameters have been changed and processing is complete, the following disp
 
 * We will use the ### PDFs that have been published here: https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-CONVERTED.zip.  These documents have been made searchable from the original release by the CIA under a FOIA request.
 
-# References
+# Appendix
+
+
