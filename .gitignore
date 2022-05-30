@@ -25,3 +25,6 @@ hs_err_pid*
 *.pdf
 
 .DS_Store
+ 
+ checkpoint-1/*.html
+ checkpoint-1/*.pdf
