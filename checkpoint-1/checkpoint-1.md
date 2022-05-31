@@ -44,7 +44,7 @@ The overall architecture will be designed around three subsystems and pipelines,
 The backed data subsystem will be responsible for opening all of the OCR'd PDF files within the specified directory, cleaning them as appropriate, and building the interim data format for the data processing pipeline. 
 
 1. Documents will be parsed and imported
-1. All words will be compared to a english dictionary and only actual words will be indexed
+1. All words will be compared to an English dictionary and only actual words will be indexed
 1. Only documents that ultimately have more than 2 words will be indexed
 
 Finally, as a stretch goal, we will have an accessor available so that a user can choose a specific document from a cluster displayed on the rendered visualizations and see the contents of the original (source) document that was used.
