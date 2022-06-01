@@ -59,7 +59,7 @@ The data processing pipeline will be responsible for building all elements requi
 This pipeline will allow the modification of a number of parameters around this clustering technique. A few examples of these include is the initial cluster space, often done via random seeding. A second is the number of clusters that the documents will be fit to. Finally, the word frequency as presented to the user for a given cluster.
 
 ### Visualization Subsystem
-The visualization subsystem will be responsible for displaying user interfaces that will allow for both the administering of the data processing pipeline parameters and also the visualization of the results of the analysis. Some of the parameters that will modifiable in the User Interface will be:
+The visualization subsystem will be responsible for displaying user interfaces that will allow for both the administering of the data processing pipeline parameters and also the visualization of the results of the analysis. Modifiable parameters in the User Interface will include:
 
  * Cluster Size
  * Clustering Initialization Method 
