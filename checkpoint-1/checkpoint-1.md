@@ -79,7 +79,7 @@ We intend to heavily leverage existing libraries to supplement our implementatio
 
 * Apache PDFBox - Open and proces text data within an OCR'd PDF document.
 * Python for Data Processing Pipeline
-* Web Frontend - ??
+* Web Frontend - reactJS or python Django are possible solutions. Further analysis will be carried out at later stages to determine the right option.
 
 # Test & Demonstration
 
