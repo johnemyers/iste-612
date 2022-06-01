@@ -5,11 +5,12 @@ date: "6/3/2022"
 output:
   pdf_document:
     latex_engine: xelatex
+  word_document: default
   html_document:
     df_print: paged
-  word_document: default
 subtitle: An Analysis of Declassified Government Documents
 ---
+\vspace{-18truemm}
 
 # Introduction
 There has been a recent uptick in the conversations surrounding the notion of "Unidentified Flying Objects," or UFOs, in the media due to Congressional inquiries on the topic. The United States Government Freedom of Information Act (FOIA) allows individual citizens the right to ask for and receive previously unreleased documents possessed by the Government upon request. When these documents are released according to the law, "Internet detectives" pour through the documents to find that hidden nugget of information. In the case of this project, we want to see if there are any hidden patterns surrounding the origin of these so-called UFOs that Government hasn't disclosed before. We will apply our developed system to a series of documents released by the Central Intelligence Agency (CIA) through a FOIA request to better understand the nature of the data.
@@ -58,28 +59,26 @@ The data processing pipeline will be responsible for building all elements requi
 This pipeline will allow the modification of a number of parameters around this clustering technique. A few examples of these include is the initial cluster space, often done via random seeding. A second is the number of clusters that the documents will be fit to. Finally, the word frequency as presented to the user for a given cluster.
 
 ### Visualization Subsystem
-The visualization subsystem will be responsible for displaying user interfaces that will allow for both the administering of the data processing pipeline parameters and also the visualization of the results of the analysis. 
-
-Several of the parameters that will modifiable in the User Interface will be:
+The visualization subsystem will be responsible for displaying user interfaces that will allow for both the administering of the data processing pipeline parameters and also the visualization of the results of the analysis. Some of the parameters that will modifiable in the User Interface will be:
 
  * Cluster Size
- * Initialization Method
- * Iterations
+ * Clustering Initialization Method 
+ * Number of Iterations
  * Feature Extraction Method
 
-Once parameters have been changed and processing is complete, the following displays will be displayed to the user as a result:
+Once parameters have been changed and processing is complete, the following representations will be displayed to the user as a result:
 
  * Optimal Cluster Graph
- * K-Means Clusters
+ * Applied/Computed Clusters
  * Word Cloud
  * Linkage to Source
 
 ## Implementation
 We intend to heavily leverage existing libraries to supplement our implementation of this project. Some initial libraries that we've identified include:
 
-* Apache PDFBox - Open and proces text data within an OCR'd PDF document.
-* Python for Data Processing Pipeline
-* Web Frontend - reactJS or python Django are possible solutions. Further analysis will be carried out at later stages to determine the right option.
+ * Apache PDFBox - Open and proces text data within an OCR'd PDF document.
+ * Python for Data Processing Pipeline
+ * Web Frontend - reactJS or python Django are possible solutions. Further analysis will be carried out at later stages to determine the right option.
 
 # Test & Demonstration
 
