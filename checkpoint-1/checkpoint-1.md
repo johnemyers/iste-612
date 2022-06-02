@@ -31,7 +31,7 @@ Our development methodology will be a standard functionally decomposed web appli
 
 This tool will be designed generically to accommodate any type of cache of FOIA-released documents from the government in PDF form. Entire directories of documents will be processed within.
 
-There will be two primary user classes for the developed software. The first user class is the *data scientist* who will set up the backend for data processing, including administering the parameters for the model generation steps. The second user class is a *citizen data consumer* interested in understanding the document set, especially for finding the hidden patterns within the data. In addition, this user class will leverage the clusters that have been exposed 
+There will be two primary user classes for the developed software. The first user class is the *data scientist* who will set up the backend for data processing, including administering the parameters for the model generation steps. The second user class is a *citizen data consumer* interested in understanding the document set, especially for finding the hidden patterns within the data. In addition, this user class will leverage the clusters that have been exposed.
 
 ## Design
 
