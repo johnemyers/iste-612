@@ -1,16 +1,15 @@
 ---
 title: "Checkpoint 2 - Team UFO"
 author: "Cory Maclauchlin, John Myers, Arivirku Thirugnanam"
-date: "6/3/2022"
+date: "6/24/2022"
 output:
-  html_document:
-    df_print: paged
-  word_document: default
   pdf_document:
     latex_engine: xelatex
+  word_document: default
+  html_document:
+    df_print: paged
 subtitle: An Analysis of Declassified Government Documents
 ---
-\vspace{-18truemm}
 
 # Introduction
 
@@ -30,5 +29,21 @@ The backend data subsystem will be responsible for opening all of the OCR'd PDF 
 
 # Initial Observations
 
+![Histogram of Word Count](./images/WordCountHist.png)
+
+|Statistic|Value|
+| ----------- | ----------- |
+|count|618|
+|mean|238.34|
+|std|492.13|
+|min|3.00|
+|25%|31.25|
+|50%|82.00|
+|75%|184.50|
+
+![Top 25 Frequent Words](./images/FrequentWordsBar.png)
+
+
 # Software Development Approach Refinement
 
+![Plot of 2-20 Clusters](./images/ElbowMethodOptimalK.png)
