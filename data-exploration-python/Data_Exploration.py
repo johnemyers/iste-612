@@ -17,7 +17,6 @@ pages=[]
 
 counts=[]
 
-totalPages = 0
 totalFiles = 0
 eliminatedFiles = 0
 
@@ -32,34 +31,29 @@ for filename in os.listdir( './data/CIA-MY-OCR/' ):
     if os.path.isfile( f ):
         docString = ""
         s = extract_text( f )
-        # creating a pdf file object 
-        pgCount = 0
-        tokens = []
         split = s.split()
+        wordCount = 0
         for w in split:
               if len(w) > 2 & len(wordnet.synsets( w )) > 0:
                   docString+=w.lower() + " "
+                  wordCount+=1
                   dict.add( w.lower() )
-                  pgCount+=1
-                  tokens.append( w.lower() )
-                  
-            
+
         # extracting text from page 
-        if len(docString.split()) > 2:
+        if wordCount > 2:
+            print( "Added file " + filename + " with " + str(len(docString.split())) + " words." )
             wiki_lst.append( docString )
             title.append( filename )
-            counts.append( pgCount )
+            counts.append( wordCount )
             totalFiles+=1
         else:
-            eliminatedFiles + 1
+            eliminatedFiles += 1
 
         print( "On File " + str(totalFiles) + " and eliminated " + str(eliminatedFiles))
         sys.stdout.flush()
-print( "Parsed " + str(totalPages) + " Total Pages" )
-print( "Parsed " + str(totalFiles) + " Total Files" )
 
-print( dict )
-print( str(len(dict)))
+#print( dict )
+print( "Dictionary of length " + str(len(dict)))
 
 plt.figure(dpi=800)
 plt.hist(counts, bins='auto')
@@ -104,22 +98,6 @@ plt2.tight_layout() #pad=1.08, h_pad=None, w_pad=None, rect=None)
 plt2.show()
 
 counts[].describe()
-
-
-df = pd.DataFrame(counts, columns =[ 'value'])
-
-df['value'].describe()
-
-Q1 = df['value'].quantile(0.25)
-Q3 = df['value'].quantile(0.75)
-IQR = Q3 - Q1    #IQR is interquartile range. 
-
-filter = (df['value'] >= Q1 - IQR) & (df['value'] <= Q3 + IQR)
-df = df.loc[filter]  
-plt3.clf()
-ax = plt3.gca()
-plt3.boxplot( df  )
-plt3.show()
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
