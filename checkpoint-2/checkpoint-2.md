@@ -1,6 +1,6 @@
 ---
 title: "Checkpoint 2 - Team UFO"
-author: "Cory Maclauchlin, John Myers, Arivirku Thirugnanam"
+author: "Cory Maclauchlan, John Myers, Arivirku Thirugnanam"
 date: "6/24/2022"
 output:
   pdf_document:
@@ -41,7 +41,7 @@ Using the criteria listed, we are forced to eliminate 95 documents with no valua
 
 # Initial Observations
 
-After parsing through the data using the documents produced and filtered as detailed above, we were able to establish a dictionary of 8,205 unique words within all of the documents available. As seen in Figure \ref{WordCountHist}, we first looked at the overall distribution of word counts within the 618 documents that had useful content within them. There is a large concentration on the lower end, so this isn't a normally distributed. In addition, there are some extreme outliers on the upper end. The team doesn't feel that this distribution will negatively effect the research to be conducted in this case as we did a fair amount of prepping of the dataset to get to this point.
+After parsing through the data using the documents produced and filtered as detailed above, we were able to establish a dictionary of 8,205 unique words within all of the documents available. As seen in Figure \ref{WordCountHist}, we first looked at the overall distribution of word counts within the 618 documents that had useful content within them. There is a large concentration on the lower end, so there isn't a normal distribution. In addition, there are some extreme outliers on the upper end. The team doesn't feel that this distribution will negatively affect the research to be conducted in this case as we did a fair amount of prepping of the dataset to get to this point.
 
 ![Histogram of Word Count\label{WordCountHist}](./images/WordCountHist.png)
 
