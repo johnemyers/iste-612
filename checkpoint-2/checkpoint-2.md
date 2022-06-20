@@ -55,7 +55,19 @@ After observing this distribution, we continued by computing the overall page wo
 
 \newpage
 
-After the analysis of the word counts per document, we next wanted to look at some simple statistics related to frequent words seen within all of the documents. We can see in Figure \ref{FrequentWordsBar} that some not surprising words emerge at the top of this list. We see that `unclassified` appears the most number of times within the documents, at 2768 times, followed by `soviet` and `russian` at 2218 and 1345, respectively. This gives us reasonable assurance that our techniques and processes are in order, as these are obviously critical keywords to the domain we are in.
+The line count is identified for each of the filtered document, i.e. the documents with atleast 3 words. A time series plot fo the line count across the documents is shown below.
+
+![Line Count Series Plot\label{lineCount}](./images/lineCount.png)
+
+The summary statistics for liner count is also gathered to look at the distribution of the lines acorss the documents. The details are provided below. The line count is greater than the word count because of the fact that there are several invalid lines in the document which were redacted. The maximum number of lines found is in C05516145.pdf in which most of the lines are unreadable.
+
+| count | mean   | std    | min | 25%   | 50%   | 75%    | max  |
+|-------|--------|--------|-----|-------|-------|--------|------|
+| 618   | 370.28 | 681.18 | 10  |  87   | 149.5 | 336.5  | 7427 |
+
+: Summary Statistics of Line Count\label{SummStats}
+
+After the analysis of the word counts and line counts per document, we next wanted to look at some simple statistics related to frequent words seen within all of the documents. We can see in Figure \ref{FrequentWordsBar} that some not surprising words emerge at the top of this list. We see that `unclassified` appears the most number of times within the documents, at 2768 times, followed by `soviet` and `russian` at 2218 and 1345, respectively. This gives us reasonable assurance that our techniques and processes are in order, as these are obviously critical keywords to the domain we are in.
 
 ![Top 25 Frequent Words\label{FrequentWordsBar}](./images/FrequentWordsBar.png)
 
