@@ -21,7 +21,7 @@ header-includes:
 
 # Introduction
 
-There has been a recent uptick in the conversations surrounding the notion of "Unidentified Flying Objects," or UFOs, in the media due to Congressional inquiries on the topic. The United States Government Freedom of Information Act (FOIA) preserves individual citizens' rights to ask for and receive previously unreleased documents possessed by the Government upon request. When these documents are released according to the law, "Internet detectives" pour through the documents to find that hidden nugget of information. In the case of this project, we want to see if there are any hidden patterns surrounding the origin of these so-called UFOs that the Government hasn't disclosed before. We will apply our developed system to a series of documents released by the Central Intelligence Agency (CIA) through a FOIA request to better understand the nature of the data.
+We want to see if there are any hidden patterns surrounding the origin of the so-called UFOs that the Government hasn't disclosed before. We will apply our developed system to a series of PDF documents released by the Central Intelligence Agency (CIA) through a FOIA request to better understand the nature of the data.
 
 # Source Data Collection
 
@@ -41,7 +41,7 @@ Using the criteria listed, we are forced to eliminate 95 documents with no valua
 
 # Initial Observations
 
-After parsing through the data using the documents produced and filtered as detailed above, we were able to establish a dictionary of 8,205 unique words within all of the documents available. As seen in Figure \ref{WordCountHist}, we first looked at the overall distribution of word counts within the 618 documents that had useful content within them. There is a large concentration on the lower end, so there isn't a normal distribution. In addition, there are some extreme outliers on the upper end. The team doesn't feel that this distribution will negatively affect the research to be conducted in this case as we did a fair amount of prepping of the dataset to get to this point.
+After parsing through the data using the documents produced and filtered as detailed above, we were able to establish a dictionary of 8,205 unique words within all the documents available. As seen in Figure \ref{WordCountHist}, we first looked at the overall distribution of word counts within the 618 documents that had useful content. There is a large concentration on the lower end, so there isn't a normal distribution. In addition, there are some extreme outliers on the upper end. The team doesn't feel that this distribution will negatively affect the research to be conducted in this case as we did a fair amount of prepping of the dataset to get to this point.
 
 ![Histogram of Word Count\label{WordCountHist}](./images/WordCountHist.png)
 
