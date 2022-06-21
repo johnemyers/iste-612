@@ -55,11 +55,11 @@ After observing this distribution, we continued by computing the overall page wo
 
 \newpage
 
-The line count is identified for each of the filtered document, i.e. the documents with atleast 3 words. A time series plot fo the line count across the documents is shown below.
+The line count is identified for each of the filtered documents, i.e. the documents with at least 3 words. A time series plot for the line count across the documents is shown below.
 
 ![Line Count Series Plot\label{lineCount}](./images/lineCount.png)
 
-The summary statistics for liner count is also gathered to look at the distribution of the lines acorss the documents. The details are provided below. The line count is greater than the word count because of the fact that there are several invalid lines in the document which were redacted. The maximum number of lines found is in C05516145.pdf in which most of the lines are unreadable.
+The summary statistics for line count is also gathered to look at the distribution of the lines across the documents. The details are provided below. In many cases the line count is greater than the word count because of the fact that there are several invalid lines in the document which were redacted. For example, the maximum number of lines found is in C05516145.pdf where most of the lines are unreadable.
 
 | count | mean   | std    | min | 25%   | 50%   | 75%    | max  |
 |-------|--------|--------|-----|-------|-------|--------|------|
