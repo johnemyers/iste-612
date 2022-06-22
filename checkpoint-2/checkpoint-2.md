@@ -35,7 +35,7 @@ The backend data subsystem will be responsible for opening all PDF files within 
 2.  All tokenized words will be compared to a Wordnet, and only words with semantics will be indexed.
 3.  Only documents that ultimately have more than two actual words will be indexed.
 
-The team initially discovered upon using the processed PDFs made available by the above website that they inserted advertisements into the PDFs. These ads were causing false keywords to be inserted into the document and causing our statistics not to be valid. As a result, we returned to the source original TIFF images released by the CIA and reran Optical Character Recognition (OCR) on those documents. This OCR was run in batch mode through Adobe Acrobat Pro and was quite time-consuming; however, because of this work, all of our initial observations are much more accurate to the reality of parsing through Government released documents. These OCR-processed documents are available upon request.
+The team initially discovered upon using the processed PDFs made available by the above website that they inserted advertisements into the PDFs[^1]. These ads were causing false keywords to be inserted into the document and causing our statistics not to be valid. As a result, we returned to the source original TIFF images released by the CIA and reran Optical Character Recognition (OCR) on those documents[^2]. This OCR was run in batch mode through Adobe Acrobat Pro and was quite time-consuming; however, because of this work, all of our initial observations are much more accurate to the reality of parsing through Government released documents. These OCR-processed documents are available upon request.
 
 Using the criteria listed, we are forced to eliminate 95 documents with no valuable content.
 
@@ -59,7 +59,7 @@ The line count is identified for each of the filtered documents, i.e. the docume
 
 ![Line Count Series Plot\label{lineCount}](./images/lineCount.png)
 
-The summary statistics for line count is also gathered to look at the distribution of the lines across the documents. The details are provided below. In many cases the line count is greater than the word count because of the fact that there are several invalid lines in the document which were redacted. For example, the maximum number of lines found is in C05516145.pdf where most of the lines are unreadable.
+The summary statistics for line count is also gathered to look at the distribution of the lines across the documents. The details are provided below. In many cases the line count is greater than the word count because of the fact that there are several invalid lines in the document which were redacted. For example, the maximum number of lines found is in `C05516145.pdf` where most of the lines are unreadable. Because documents have potentially degraded information due to both scanning quality and redactions inherent within FOIA-released documents, this measure is useful to ascertain viability of information within.  We assess that between these two measures, this remains a reasonable dataset to continue our development on.
 
 | count | mean   | std    | min | 25%   | 50%   | 75%    | max  |
 |-------|--------|--------|-----|-------|-------|--------|------|
@@ -73,13 +73,17 @@ After the analysis of the word counts and line counts per document, we next want
 
 Now that we know we have a reasonable data processing pipeline for the backend, we began to look at refining our software development approach and converge on what information retrieval and text mining operations can be applied for our entire application.
 
-# Software Development Approach Refinement
+# Initial Cluster Exploration
 
-We began looking at a high level of what we can learn.
+We began looking at a high level of what clusters exist within the data when tokenizing actual English words within the documents.  Figure \ref{ElbowMethodOptimalK} shows the Sum of Square Distances for k-clusters where `k` is between 2 and 20.  If we choose a cluster size of 10 based upon the observations, Table \ref{Clusters} shows Word Clouds for four of those clusters. Further research will be conducted in this area in subsequent milestones to understand better what those clusters might indicate, as well as determine similarity between documents within those clusters.
 
 ![Plot of 2-20 Clusters\label{ElbowMethodOptimalK}](./images/ElbowMethodOptimalK.png)
 
-# Document Sets
+| | |
+|--|--|
+|![](./images/186cc4fa-251d-47e7-9682-b65b949d8333.png)|![](./images/454d0e0f-3dc9-43dc-ae6c-fe96f44e0f3a.png)|
+|![](./images/4ab90ea9-fcd9-4e03-af6e-f0a3cbdc3442.png)|![](./images/77e349f4-1cea-4d99-987a-b8d84bd80b6a.png)|
+: Sample Word Clouds for Four Clusters\label{Clusters}
 
--   Raw TIFF images from Government: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-UNTOUCHED.zip>
--   Processed "Searchable" PDFs with Advertisement: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-CONVERTED.zip>
+[^2]: Raw TIFF images from Government: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-UNTOUCHED.zip>
+[^1]: Processed "Searchable" PDFs with Advertisement: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-CONVERTED.zip>
