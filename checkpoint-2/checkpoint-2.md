@@ -35,7 +35,7 @@ The backend data subsystem will be responsible for opening all PDF files within 
 2.  All tokenized words will be compared to a Wordnet, and only words with semantics will be indexed.
 3.  Only documents that ultimately have more than two actual words will be indexed.
 
-The team initially discovered upon using the processed PDFs made available by the above website that they inserted advertisements into the PDFs[^1]. These ads were causing false keywords to be inserted into the document and causing our statistics not to be valid. As a result, we returned to the source original TIFF images released by the CIA and reran Optical Character Recognition (OCR) on those documents[^2]. This OCR was run in batch mode through Adobe Acrobat Pro and was quite time-consuming; however, because of this work, all of our initial observations are much more accurate to the reality of parsing through Government released documents. These OCR-processed documents are available upon request.
+The team initially discovered upon using the processed PDFs made available by the above website that they inserted advertisements into the PDFs[^1]. These ads were causing false keywords to be inserted into the document and causing our statistics not to be valid. As a result, we returned to the source original TIFF images released by the CIA and reran Optical Character Recognition (OCR) on those documents[^2]. This OCR was run in batch mode through Adobe Acrobat Pro and was quite time-consuming; however, because of this work, all of our initial observations are much more accurate to the reality of parsing through Government released documents. These OCR-processed documents are available upon request.[^3]
 
 Using the criteria listed, we are forced to eliminate 95 documents with no valuable content.
 
@@ -89,3 +89,4 @@ We began looking at a high level of what clusters exist within the data when tok
 
 [^2]: Raw TIFF images from Government: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-UNTOUCHED.zip>
 [^1]: Processed "Searchable" PDFs with Advertisement: <https://documents2.theblackvault.com/documents/cia/CIAUFOCD-FULL-CONVERTED.zip>
+[^3]: Team GitHub with Data: <https://github.com/johnemyers/iste-612/tree/main/data/CIA-MY-OCR>
