@@ -31,9 +31,9 @@ Our goal is to use 713 Government-released documents that have been made availab
 
 The backend data subsystem will be responsible for opening all PDF files within the specified directory, cleaning them as appropriate, and building the interim data products for the data processing pipeline.
 
-1.  Documents are opened, tokenized, and imported into memory.
-2.  All tokenized words will be compared to a Wordnet, and only words with semantics will be indexed.
-3.  Only documents that ultimately have more than two actual words will be indexed.
+ 1.  Documents are opened, tokenized, and imported into memory.
+ 1.  All tokenized words will be compared to a Wordnet, and only words with semantics will be indexed.
+ 1.  Only documents that ultimately have more than two actual words will be indexed.
 
 The team initially discovered upon using the processed PDFs made available by the above website that they inserted advertisements into the PDFs[^1]. These ads were causing false keywords to be inserted into the document and causing our statistics not to be valid. As a result, we returned to the source original TIFF images released by the CIA and reran Optical Character Recognition (OCR) on those documents[^2]. This OCR was run in batch mode through Adobe Acrobat Pro and was quite time-consuming; however, because of this work, all of our initial observations are much more accurate to the reality of parsing through Government released documents. These OCR-processed documents are available upon request.[^3]
 
