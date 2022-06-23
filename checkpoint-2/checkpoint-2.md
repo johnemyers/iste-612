@@ -56,7 +56,7 @@ After observing this distribution, we continued by computing the overall page wo
 
 \newpage
 
-The line count is identified for each of the filtered documents, i.e. the documents with at least three words. A time series plot for the line count across the documents is shown in Figure \ref{lineCount}.
+In addition, a line count was computed for each of the filtered documents (documents with at least three words). A series plot by Document ID/Name for the line count across the documents is shown in Figure \ref{lineCount}.
 
 ![Line Count Series Plot\label{lineCount}](./images/LineCountSeriesPlot.png)
 
