@@ -9,12 +9,13 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
-print(os.curdir)
-print(os.listdir(os.curdir))
+#path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
+#os.chdir(path)
 #for f in os.listdir('./data-exploration-python'):
 #    print(f)
 
-df = pd.read_excel(r'C:\Users\UvirA\Documents\GitHub\iste-612\data-exploration-python\dataSummary.xlsx')    #reading the summary df that contains the text of each document
+df = pd.read_excel('./data-exploration-python/dataSummary.xlsx')
+#df = pd.read_excel(r'C:\Users\UvirA\Documents\GitHub\iste-612\data-exploration-python\dataSummary.xlsx')    #reading the summary df that contains the text of each document
 texts = df['text'].tolist()
 stop_words = set(stopwords.words('english')) #English stopwords from nltk package
 cleaned_text = []
