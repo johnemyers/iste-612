@@ -75,9 +75,9 @@ dfAllData['lineCount'] = lineCount
 #dfAllData.to_excel(r'C:\Users\UvirA\Documents\GitHub\iste-612\checkpoint-2\dataSummary.xlsx')
 
 plt.plot(dfAllData['lineCount'])
-plt.xlabel("DocumentID")
-plt.ylabel("lineCount")
-plt.title("Line Count Series PLot")
+plt.xlabel("Document ID")
+plt.ylabel("Line Count")
+plt.title("Line Count Series Plot")
 
 # show plot
 plt.tight_layout()
@@ -153,28 +153,28 @@ elbowplt.xlabel('k')
 elbowplt.ylabel('Sum_of_squared_distances')
 elbowplt.title('Elbow Method For Optimal k')
 elbowplt.show()
-#
-# true_k = 12
-# model = KMeans(n_clusters=true_k, init='k-means++', max_iter=200, n_init=10)
-# model.fit(X)
-# labels=model.labels_
-# wiki_cl=pd.DataFrame(list(zip(title,labels)),columns=['title','cluster'])
-# print(wiki_cl.sort_values(by=['cluster']))
-#
-# from wordcloud import WordCloud
-# result={'cluster':labels,'wiki':wiki_lst}
-# result=pd.DataFrame(result)
-# for k in range(0,true_k):
-#     s=result[result.cluster==k]
-#     text=s['wiki'].str.cat(sep=' ')
-#     text=text.lower()
-#     text=' '.join([word for word in text.split()])
-#     wordcloud = WordCloud(width=800, height=400, max_words=80, background_color="white").generate(text)
-#     print('Cluster: {}'.format(k))
-#     titles=wiki_cl[wiki_cl.cluster==k]['title']
-#     print('NumDocs: {}'.format(len(titles)))
-# #    print(titles.to_string(index=False))
-#     plt.figure(figsize=(14,6))
-#     plt.imshow(wordcloud, interpolation="bilinear")
-#     plt.axis("off")
-#     plt.show()
+
+true_k = 12
+model = KMeans(n_clusters=true_k, init='k-means++', max_iter=200, n_init=10)
+model.fit(X)
+labels=model.labels_
+wiki_cl=pd.DataFrame(list(zip(title,labels)),columns=['title','cluster'])
+print(wiki_cl.sort_values(by=['cluster']))
+
+from wordcloud import WordCloud
+result={'cluster':labels,'wiki':wiki_lst}
+result=pd.DataFrame(result)
+for k in range(0,true_k):
+    s=result[result.cluster==k]
+    text=s['wiki'].str.cat(sep=' ')
+    text=text.lower()
+    text=' '.join([word for word in text.split()])
+    wordcloud = WordCloud(width=800, height=400, max_words=80, background_color="white").generate(text)
+    print('Cluster: {}'.format(k))
+    titles=wiki_cl[wiki_cl.cluster==k]['title']
+    print('NumDocs: {}'.format(len(titles)))
+#    print(titles.to_string(index=False))
+    plt.figure(figsize=(14,6))
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
