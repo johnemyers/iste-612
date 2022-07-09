@@ -2,6 +2,10 @@ import streamlit as st
 import nltk
 from pdfminer.high_level import extract_text
 from nltk.corpus import wordnet
+import matplotlib.pyplot as plt2
+import advertools as adv
+import pandas as pd
+import numpy as np
 
 nltk.download('wordnet')
 
@@ -17,15 +21,17 @@ st.markdown(chevron.read(), unsafe_allow_html=True)
 
 dict = {''}
 
+wiki_lst = []
+title = []
+counts = []
+
+
 uploaded_files = st.file_uploader("Choose a file", type=['pdf'], accept_multiple_files=True)
-
-length = len(uploaded_files)
-
 process_progress = st.progress(0)
-
-fileNum = 1
+fileNum = 0
 readInFiles = False;
 for uploaded_file in uploaded_files:
+    length = len(uploaded_files)
     with st.spinner('Parsing Text of File # ' + str(fileNum) + " ...." ):
       docString = ""
       s = extract_text(uploaded_file)
@@ -36,10 +42,44 @@ for uploaded_file in uploaded_files:
         docString += w.lower() + " "
         wordCount += 1
         dict.add(w.lower())
+    # extracting text from page
+    if wordCount > 2:
+        wiki_lst.append(docString)
+        title.append(uploaded_file)
+        counts.append(wordCount)
+
     process_progress.progress( fileNum/length )
     fileNum += 1
     readInFiles = True
     
 if readInFiles:
   st.success( "Imported " + str(fileNum) + " PDF files.  Dictionary size is " + str(len(dict)))
+  
+  df = pd.DataFrame(wiki_lst, columns=['value'])
+  word_freq = adv.word_frequency(text_list=df['value'])
+  
+  frequency = word_freq.sort_values(by='abs_freq', ascending=False).head(25)
+  
+  # rearrange your data
+  labels = frequency['word']
+  values = frequency['abs_freq']
+  
+  indexes = np.arange(len(labels))
+  
+  plt2.barh(indexes, values)
+  
+  # add labels
+  
+  plt2.yticks(indexes, labels, rotation=0)
+  plt2.title("Top 25 Frequent Words & Terms")
+  
+  ax = plt2.gca()
+  ax.set_xlabel("Frequency of Word/Term")
+  ax.set_ylabel("Word/Term")
+  
+  plt2.tight_layout()  # pad=1.08, h_pad=None, w_pad=None, rect=None)
+  
+  st.pyplot( plt2 )
+
+
 
