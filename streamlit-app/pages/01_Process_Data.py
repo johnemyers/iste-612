@@ -21,9 +21,9 @@ st.markdown(chevron.read(), unsafe_allow_html=True)
 
 dict = {''}
 
-wiki_lst = []
-title = []
-counts = []
+st.session_state.pdf_lst = []
+st.session_state.titles = []
+st.session_state.counts = []
 
 
 uploaded_files = st.file_uploader("Choose a file", type=['pdf'], accept_multiple_files=True)
@@ -44,9 +44,9 @@ for uploaded_file in uploaded_files:
         dict.add(w.lower())
     # extracting text from page
     if wordCount > 2:
-        wiki_lst.append(docString)
-        title.append(uploaded_file)
-        counts.append(wordCount)
+        st.session_state.pdf_lst.append(docString)
+        st.session_state.titles.append(uploaded_file)
+        st.session_state.counts.append(wordCount)
 
     process_progress.progress( fileNum/length )
     fileNum += 1
@@ -55,7 +55,7 @@ for uploaded_file in uploaded_files:
 if readInFiles:
   st.success( "Imported " + str(fileNum) + " PDF files.  Dictionary size is " + str(len(dict)))
   
-  df = pd.DataFrame(wiki_lst, columns=['value'])
+  df = pd.DataFrame(st.session_state.pdf_lst, columns=['value'])
   word_freq = adv.word_frequency(text_list=df['value'])
   
   frequency = word_freq.sort_values(by='abs_freq', ascending=False).head(25)

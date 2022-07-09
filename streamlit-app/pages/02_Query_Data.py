@@ -9,5 +9,13 @@ st.markdown( style.read(), unsafe_allow_html=True )
 chevron = open( "./pages/html/query.html")
 st.markdown(chevron.read(), unsafe_allow_html=True)
 
-st.text_input( "Terms of Query" )
-st.button( "Search" )
+try:
+    x = st.session_state.pdf_lst
+    ready = True
+except AttributeError:
+    ready = False
+    st.error( "Please start by processing PDF files and then try again." )
+
+if ready:
+  st.text_input( "Terms of Query" )
+  st.button( "Search" )
