@@ -4,10 +4,12 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 
-# nltk.download('stopwords')
-# nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('punkt')
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
+
+print( os.getcwd() )
 
 #path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
 #os.chdir(path)
