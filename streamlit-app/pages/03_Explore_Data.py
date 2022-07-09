@@ -17,10 +17,14 @@ ready = False
 
 try:
     x = st.session_state.pdf_lst
-    ready = True
+    maxK = len(x)
+    if maxK > 1:
+      ready = True
+    else:
+      st.warning( "Please process more than one PDF file and then try again." )
 except AttributeError:
     ready = False
-    st.error( "Please start by processing PDF files and then try again." )
+    st.warning( "Please start by processing PDF files and then try again." )
 
 if ready:
   from sklearn.feature_extraction.text import TfidfVectorizer
@@ -37,7 +41,9 @@ if ready:
   
   #
   Sum_of_squared_distances = []
-  K = range(2, 20)
+  if( maxK > 20 ):
+    maxK = 20
+  K = range(1, maxK)
   for k in K:
       km = KMeans(n_clusters=k, max_iter=200, n_init=10)
       km = km.fit(X)
@@ -49,7 +55,7 @@ if ready:
   elbowplt.title('Elbow Method For Optimal k')
   st.pyplot( elbowplt )
   
-  true_k = st.slider( "Number of Clusters", min_value=0, max_value=10, value=0 )
+  true_k = st.slider( "Number of Clusters", min_value=0, max_value=maxK, value=0 )
   
   
   

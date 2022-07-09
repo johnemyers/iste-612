@@ -14,7 +14,7 @@ try:
     ready = True
 except AttributeError:
     ready = False
-    st.error( "Please start by processing PDF files and then try again." )
+    st.warning( "Please start by processing PDF files and then try again." )
 
 if ready:
   st.text_input( "Terms of Query" )
