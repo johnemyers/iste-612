@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 
+st.sidebar.image( "./images/home.png", use_column_width=True)
 
 colT1,colT2,colT3 = st.columns(3)
 with colT2:

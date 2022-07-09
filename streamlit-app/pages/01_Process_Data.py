@@ -5,6 +5,8 @@ from nltk.corpus import wordnet
 
 nltk.download('wordnet')
 
+st.sidebar.image( "./images/process.png", use_column_width=True)
+
 
 style = open( "./pages/html/style.html")
 st.markdown( style.read(), unsafe_allow_html=True )
@@ -12,7 +14,7 @@ st.markdown( style.read(), unsafe_allow_html=True )
 chevron = open( "./pages/html/process.html")
 st.markdown(chevron.read(), unsafe_allow_html=True)
 
-dict = {'dict'}
+dict = {''}
 
 uploaded_files = st.file_uploader("Choose a file", type=['pdf'], accept_multiple_files=True)
 
@@ -21,6 +23,7 @@ length = len(uploaded_files)
 process_progress = st.progress(0)
 
 fileNum = 1
+readInFiles = False;
 for uploaded_file in uploaded_files:
     with st.spinner('Parsing Text of File # ' + str(fileNum) + " ...." ):
       docString = ""
@@ -32,8 +35,10 @@ for uploaded_file in uploaded_files:
         docString += w.lower() + " "
         wordCount += 1
         dict.add(w.lower())
-        print( w.lower() )
     process_progress.progress( fileNum/length )
     fileNum += 1
-
+    readInFiles = True
+    
+if readInFiles:
+  st.success( "Imported " + str(fileNum) + " PDF files.  Dictionary size is " + str(len(dict)))
 
