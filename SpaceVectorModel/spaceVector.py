@@ -11,8 +11,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 print( os.getcwd() )
 
 
-path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
-os.chdir(path)
+#path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
+#os.chdir(path)
 # for f in os.listdir('./data-exploration-python'):
 #    print(f)
 
