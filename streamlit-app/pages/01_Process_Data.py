@@ -7,7 +7,7 @@ import advertools as adv
 import pandas as pd
 import numpy as np
 
-#nltk.download('wordnet')
+nltk.download('wordnet')
 print( "Invoked Process Data" )
 
 st.sidebar.image( "./images/process.png", use_column_width=True)
