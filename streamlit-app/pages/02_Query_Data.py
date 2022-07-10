@@ -1,11 +1,6 @@
 import streamlit as st
 import os
-from vectorSpaceModel.vectorSpace import vectorSpace  # generate Vector space model
 
-v = vectorSpace()  # Object instantiation to perform ranked retrieval
-#path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
-#os.chdir(path)
-#streamlit-app folder to be added to path for local run.
 
 st.sidebar.image("./images/query.png", use_column_width=True)
 st.sidebar.write(
@@ -19,14 +14,18 @@ chevron = open("./pages/html/query.html")
 st.markdown(chevron.read(), unsafe_allow_html=True)
 
 try:
-    x = st.session_state.pdf_lst
+    x = st.session_state.dfAllData
     ready = True
 except AttributeError:
     ready = False
     st.warning("Please start by processing PDF files and then try again.")
+    
+
 
 # if processing is completed perform the retrieval else ask the user to perform processing.
 if ready:
+    from vectorSpaceModel.vectorSpace import vectorSpace  # generate Vector space model
+    v = vectorSpace()
     query = st.text_input("Terms of Query", value="")  # Query term to be searched for in the document collections.
     rank = st.number_input("no.of. documents", 1, 600)  # no.of. documents to be retrieved.
     if st.button("Search"): # Check if button clicked

@@ -7,7 +7,8 @@ import advertools as adv
 import pandas as pd
 import numpy as np
 
-nltk.download('wordnet')
+#nltk.download('wordnet')
+print( "Invoked Process Data" )
 
 st.sidebar.image( "./images/process.png", use_column_width=True)
 st.sidebar.write('<style>body { margin: 0; font-family: Arial, Helvetica, sans-serif;} .header{padding: 10px 16px; background: #555; color: #f1f1f1; position:fixed;top:0;} .sticky { position: fixed; top: 0; width: 100%;} </style><div class="header" id="myHeader">FOIA Document Analysis</div>', unsafe_allow_html=True)
@@ -25,10 +26,12 @@ st.session_state.pdf_lst = []
 st.session_state.titles = []
 st.session_state.counts = []
 
+st.session_state.dfAllData = pd.DataFrame()
+
 
 uploaded_files = st.file_uploader("Choose a file", type=['pdf'], accept_multiple_files=True)
 process_progress = st.progress(0)
-fileNum = 0
+fileNum = 1
 readInFiles = False;
 for uploaded_file in uploaded_files:
     length = len(uploaded_files)
@@ -45,8 +48,9 @@ for uploaded_file in uploaded_files:
     # extracting text from page
     if wordCount > 2:
         st.session_state.pdf_lst.append(docString)
-        st.session_state.titles.append(uploaded_file)
+        st.session_state.titles.append(uploaded_file.name)
         st.session_state.counts.append(wordCount)
+        print( uploaded_file.name + " " + str(wordCount ) )
 
     process_progress.progress( fileNum/length )
     fileNum += 1
@@ -54,6 +58,11 @@ for uploaded_file in uploaded_files:
     
 if readInFiles:
   st.success( "Imported " + str(fileNum) + " PDF files.  Dictionary size is " + str(len(dict)))
+  
+  st.session_state.dfAllData['text'] = st.session_state.pdf_lst
+  st.session_state.dfAllData['fileName'] = st.session_state.titles
+  st.session_state.dfAllData['wordCount'] = st.session_state.counts
+#  st.session_state.dfAllData['lineCount'] = lineCount
   
   df = pd.DataFrame(st.session_state.pdf_lst, columns=['value'])
   word_freq = adv.word_frequency(text_list=df['value'])
