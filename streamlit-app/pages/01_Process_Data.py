@@ -7,8 +7,8 @@ import advertools as adv
 import pandas as pd
 import numpy as np
 
-nltk.download('wordnet')
-print( "Invoked Process Data" )
+#TODO Add some logic here.
+#nltk.download('wordnet')
 
 st.sidebar.image( "./images/process.png", use_column_width=True)
 st.sidebar.write('<style>body { margin: 0; font-family: Arial, Helvetica, sans-serif;} .header{padding: 10px 16px; background: #555; color: #f1f1f1; position:fixed;top:0;} .sticky { position: fixed; top: 0; width: 100%;} </style><div class="header" id="myHeader">FOIA Document Analysis</div>', unsafe_allow_html=True)
