@@ -13,9 +13,14 @@ st.markdown(style.read(), unsafe_allow_html=True)
 chevron = open("./pages/html/query.html")
 st.markdown(chevron.read(), unsafe_allow_html=True)
 
+ready = False
+
 try:
-    x = st.session_state.dfAllData
-    ready = True
+    x = st.session_state.pdf_lst
+    if( len(x) > 0 ):
+      ready = True
+    else:
+      st.warning("Please start by processing PDF files and then try again.")
 except AttributeError:
     ready = False
     st.warning("Please start by processing PDF files and then try again.")
