@@ -1,3 +1,5 @@
+import os
+
 import nltk
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -7,22 +9,25 @@ nltk.download('punkt')
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
-
+#personal space not used
 #path = 'C:/Users/UvirA/Documents/GitHub/iste-612'
 #os.chdir(path)
 
 class vectorSpace:
-    df = pd.read_excel('C:/Users/UvirA/Documents/GitHub/iste-612/data-exploration-python/dataSummary.xlsx')
-    # df = pd.read_excel(r'C:\Users\UvirA\Documents\GitHub\iste-612\data-exploration-python\dataSummary.xlsx')    #reading the summary df that contains the text of each document
-    stop_words = set(stopwords.words('english'))
-      # English stopwords from nltk package
 
+    #Class Variables
+    df = pd.read_excel('./data-exploration-python/dataSummary.xlsx') # this should be generated as part of
+    # preprocessing step. Could be converted to instance variable depending on need. to be changed to possibly refer to a dataframe
+    #created within the Process_Data or Data_Exploration.
+    stop_words = set(stopwords.words('english')) # English stopwords from nltk package
 
+    #initializer to create instance variables
     def __init__(self):
-        self.doc_vector = None
-        self.texts = self.df['text'].tolist()
-        self.cleaned_text = []
+        self.doc_vector = None #vector space for all the doc text.
+        self.texts = self.df['text'].tolist() #list of texts of all the documents in the collection.
+        self.cleaned_text = [] #cleansed text after removing stop words and performing stemming.
 
+    # function to tokenize and preprocess the texts in the documents
     def preprocessDoc(self):
         for doc in self.texts:
             tokens = self.tokenize_text(doc)
@@ -31,7 +36,7 @@ class vectorSpace:
             final_text = ' '.join(final_text)
             self.cleaned_text.append(final_text)
 
-
+    # function to tokenize each document text.
     def tokenize_text(self,doc_text):
         tokens = nltk.word_tokenize(doc_text)
         return tokens
@@ -52,10 +57,12 @@ class vectorSpace:
                 cleaned_text.append(words)
         return cleaned_text
 
+    # Function that performs ranked retrieval for the input query and no.of. documents needed for retrieval.
+    # if rank is not passed , default of 10 documents will be retrieved.
     def queryVectorizer(self, query, rank=10):
         self.preprocessDoc()
         vectorizer = TfidfVectorizer()
-        vectorizer.fit(self.cleaned_text)
+        vectorizer.fit(self.cleaned_text)   #fitting the vectorizer to cleansed text
         self.doc_vector = vectorizer.transform(self.cleaned_text)
         query = self.tokenize_text(query)  # tokenize query
         query = self.remove_stopwords(query)  # remove stopwords
@@ -66,20 +73,17 @@ class vectorSpace:
         query_vector = vectorizer.transform([q])  # vector for the query
 
         # Calculate Cosine similarities
-
         cosineSimilarities = cosine_similarity(self.doc_vector, query_vector).flatten()
 
-        related_docs_indices = cosineSimilarities.argsort()[:-(rank+1):-1]
-        #print(related_docs_indices)
+        related_docs_indices = cosineSimilarities.argsort()[:-(rank+1):-1] # retrieve index from the documents
 
-        # Printing the docID for ranked document,
-        # This will be returned to the UI from which the user can be access the document(stretch goal)
+        # retrieving the document name and content for each indices from the dataframe.
         for i in related_docs_indices:
             docId = self.df[['fileName','text']].iloc[related_docs_indices]
         filteredDoc = pd.DataFrame(docId)
         filteredDoc.columns = ['File Name', 'Content']
-        return (filteredDoc)
+        return (filteredDoc)    #returning the dataframe of filename and content to display on the UI.
 
-if __name__ == '__main__':
+if __name__ == '__main__': # solely for testing purpose, should be used as package than a main class.
     v = vectorSpace()
     print(v.queryVectorizer("russian space"))
