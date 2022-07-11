@@ -48,9 +48,9 @@ if ready:
   for k in K:
       km = KMeans(n_clusters=k, max_iter=200, n_init=10)
       km = km.fit(X)
-      label=km.predict(X)
-      s = silhouette_score(X, label)
-      print('Silhouette Score(n=(' + str(k) + '): {' + str(s) + '}')
+      #label=km.predict(X)
+      #s = silhouette_score(X, label)
+      #print('Silhouette Score(n=(' + str(k) + '): {' + str(s) + '}')
       Sum_of_squared_distances.append(km.inertia_)
   
   elbowplt.plot(K, Sum_of_squared_distances, 'bx-')
