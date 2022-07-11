@@ -38,15 +38,19 @@ if ready:
   # plt = {}
   import matplotlib.pyplot as elbowplt
   from sklearn.cluster import KMeans
+  from sklearn.metrics import silhouette_score
   
   #
   Sum_of_squared_distances = []
   if( maxK > 20 ):
     maxK = 20
-  K = range(1, maxK)
+  K = range(2, maxK+1)
   for k in K:
       km = KMeans(n_clusters=k, max_iter=200, n_init=10)
       km = km.fit(X)
+      label=km.predict(X)
+      s = silhouette_score(X, label)
+      print('Silhouette Score(n=(' + str(k) + '): {' + str(s) + '}')
       Sum_of_squared_distances.append(km.inertia_)
   
   elbowplt.plot(K, Sum_of_squared_distances, 'bx-')
