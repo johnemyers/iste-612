@@ -85,6 +85,8 @@ class vectorSpace:
             docId = st.session_state.dfAllData[['fileName','text']].iloc[related_docs_indices]
         filteredDoc = pd.DataFrame(docId)
         filteredDoc.columns = ['File Name', 'Content']
+        filteredDoc = filteredDoc.assign(SNo=range(1,len(filteredDoc)+1)).set_index('SNo')
+
         return (filteredDoc)    #returning the dataframe of filename and content to display on the UI.
 
 if __name__ == '__main__': # solely for testing purpose, should be used as package than a main class.
