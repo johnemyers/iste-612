@@ -8,7 +8,7 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
-print( os.getcwd() )
+
 
 
 #path = 'C:/Users/UvirA/Documents/GitHub/iste-612'

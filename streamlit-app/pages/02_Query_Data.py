@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 
 
 st.sidebar.image("./images/query.png", use_column_width=True)
