@@ -73,6 +73,7 @@ if ready:
     from wordcloud import WordCloud
     result={'cluster':labels,'wiki':st.session_state.pdf_lst}
     result=pd.DataFrame(result)
+
     for k in range(0,true_k):
         s=result[result.cluster==k]
         text=s['wiki'].str.cat(sep=' ')
@@ -86,4 +87,6 @@ if ready:
         plt.figure(figsize=(14,6))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
+        st.subheader( "Cluster #" + str(k+1))
         st.pyplot(plt)
+        
