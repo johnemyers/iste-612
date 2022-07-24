@@ -37,27 +37,37 @@ if ready:
   # print(X.shape)
   # plt = {}
   import matplotlib.pyplot as elbowplt
+  import matplotlib.pyplot as silhouetteplt
   from sklearn.cluster import KMeans
   from sklearn.metrics import silhouette_score
   
   #
   Sum_of_squared_distances = []
+  Silhouette_scores = []
   if( maxK > 20 ):
     maxK = 20
   K = range(2, maxK+1)
   for k in K:
       km = KMeans(n_clusters=k, max_iter=200, n_init=10)
       km = km.fit(X)
-      #label=km.predict(X)
-      #s = silhouette_score(X, label)
+      label=km.predict(X)
+      Silhouette_scores.append( silhouette_score(X, label) )
       #print('Silhouette Score(n=(' + str(k) + '): {' + str(s) + '}')
       Sum_of_squared_distances.append(km.inertia_)
   
   elbowplt.plot(K, Sum_of_squared_distances, 'bx-')
   elbowplt.xlabel('k')
-  elbowplt.ylabel('Sum_of_squared_distances')
+  elbowplt.ylabel('Sum of Squared Distances')
   elbowplt.title('Elbow Method For Optimal k')
   st.pyplot( elbowplt )
+  
+  elbowplt.clf()
+  
+  silhouetteplt.plot( K, Silhouette_scores, 'bx-' )
+  silhouetteplt.xlabel( 'k' )
+  silhouetteplt.ylabel( 'Silhouette Score')
+  silhouetteplt.title('Silhouette Score For Optimal k')
+  st.pyplot( silhouetteplt )
   
   true_k = st.slider( "Number of Clusters", min_value=0, max_value=maxK, value=0 )
   
@@ -87,6 +97,6 @@ if ready:
         plt.figure(figsize=(14,6))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
-        st.subheader( "Cluster #" + str(k+1))
+        st.subheader( "Cluster #" + str(k+1) + " - Label Information Here")
         st.pyplot(plt)
         
