@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
+import matplotlib
 
 st.sidebar.image( "./images/explore.png", use_column_width=True)
 st.sidebar.write('<style>body { margin: 0; font-family: Arial, Helvetica, sans-serif;} .header{padding: 10px 16px; background: #555; color: #f1f1f1; position:fixed;top:0;} .sticky { position: fixed; top: 0; width: 100%;} </style><div class="header" id="myHeader">FOIA Document Analysis</div>', unsafe_allow_html=True)
@@ -13,11 +14,12 @@ st.markdown( style.read(), unsafe_allow_html=True )
 chevron = open( "./pages/html/explore.html")
 st.markdown(chevron.read(), unsafe_allow_html=True)
 
+
 ready = False
 
 try:
     x = st.session_state.pdf_lst
-    maxK = len(x)
+    maxK = len(x)-1
     if maxK > 1:
       ready = True
     else:
@@ -27,20 +29,19 @@ except AttributeError:
     st.warning( "Please start by processing PDF files and then try again." )
 
 if ready:
+
   from sklearn.feature_extraction.text import TfidfVectorizer
-  
-  vectorizer = TfidfVectorizer()
+  from sklearn.decomposition import TruncatedSVD
+  from sklearn.pipeline import make_pipeline
+  from sklearn.preprocessing import Normalizer
+
+  vectorizer = TfidfVectorizer(stop_words='english',lowercase=True)
   
   X = vectorizer.fit_transform(st.session_state.pdf_lst)
-  #
-  # #print(vectorizer.get_feature_names())
-  # print(X.shape)
-  # plt = {}
-  import matplotlib.pyplot as elbowplt
-  import matplotlib.pyplot as silhouetteplt
+
   from sklearn.cluster import KMeans
   from sklearn.metrics import silhouette_score
-  
+
   #
   Sum_of_squared_distances = []
   Silhouette_scores = []
@@ -55,48 +56,68 @@ if ready:
       #print('Silhouette Score(n=(' + str(k) + '): {' + str(s) + '}')
       Sum_of_squared_distances.append(km.inertia_)
   
-  elbowplt.plot(K, Sum_of_squared_distances, 'bx-')
-  elbowplt.xlabel('k')
-  elbowplt.ylabel('Sum of Squared Distances')
-  elbowplt.title('Elbow Method For Optimal k')
-  st.pyplot( elbowplt )
+  plt.figure( 1 )
+  plt.plot(K, Sum_of_squared_distances, 'bx-')
+  plt.xlabel('k')
+  plt.ylabel('Sum of Squared Distances')
+  plt.title('Elbow Method For Optimal k')
+  st.pyplot( plt )
   
-  elbowplt.clf()
-  
-  silhouetteplt.plot( K, Silhouette_scores, 'bx-' )
-  silhouetteplt.xlabel( 'k' )
-  silhouetteplt.ylabel( 'Silhouette Score')
-  silhouetteplt.title('Silhouette Score For Optimal k')
-  st.pyplot( silhouetteplt )
-  
-  true_k = st.slider( "Number of Clusters", min_value=0, max_value=maxK, value=0 )
-  
-  
-  
-  if true_k > 0:
-    model = KMeans(n_clusters=true_k, init='k-means++', max_iter=200, n_init=10)
-    model.fit(X)
-    labels=model.labels_
-    wiki_cl=pd.DataFrame(list(zip(st.session_state.titles,labels)),columns=['title','cluster'])
-    print(wiki_cl.sort_values(by=['cluster']))
-    
-    from wordcloud import WordCloud
-    result={'cluster':labels,'wiki':st.session_state.pdf_lst}
-    result=pd.DataFrame(result)
+  plt.figure( 2 )
+  plt.plot( K, Silhouette_scores, 'bx-' )
+  plt.xlabel( 'k' )
+  plt.ylabel( 'Silhouette Score')
+  plt.title('Silhouette Score For Optimal k')
+  st.pyplot( plt )
 
-    for k in range(0,true_k):
-        s=result[result.cluster==k]
-        text=s['wiki'].str.cat(sep=' ')
-        text=text.lower()
-        text=' '.join([word for word in text.split()])
-        wordcloud = WordCloud(width=800, height=400, max_words=80, background_color="white").generate(text)
-        print('Cluster: {}'.format(k))
-        titles=wiki_cl[wiki_cl.cluster==k]['title']
-        print('NumDocs: {}'.format(len(titles)))
-    #    print(titles.to_string(index=False))
-        plt.figure(figsize=(14,6))
-        plt.imshow(wordcloud, interpolation="bilinear")
-        plt.axis("off")
-        st.subheader( "Cluster #" + str(k+1) + " - Label Information Here")
-        st.pyplot(plt)
-        
+  true_k = st.slider( "Number of Clusters", min_value=0, max_value=maxK, value=0 )
+
+  if st.button("Calculate") and true_k > 0:
+      model = KMeans(n_clusters=true_k, init='k-means++')
+      model.fit(X)
+      labels=model.labels_
+      wiki_cl=pd.DataFrame(list(zip(st.session_state.titles,st.session_state.counts,st.session_state.quality,labels)),columns=['title','count','quality','cluster'])
+      print(wiki_cl.sort_values(by=['cluster']))
+      
+      from wordcloud import WordCloud
+      result={'cluster':labels,'wiki':st.session_state.pdf_lst}
+      result=pd.DataFrame(result)
+  
+      for k in range(0,true_k):
+          s=result[result.cluster==k]
+          text=s['wiki'].str.cat(sep=' ')
+          text=text.lower()
+          text=' '.join([word for word in text.split()])
+          wordcloud = WordCloud(width=800, height=400, max_words=80, background_color="white").generate(text)
+          print('Cluster: {}'.format(k))
+          titles=wiki_cl[wiki_cl.cluster==k]['title']
+          numDocs = len(titles)
+          
+          counts=wiki_cl[wiki_cl.cluster==k]['count']
+          avgLength = sum(counts) / numDocs
+          
+          qualities=wiki_cl[wiki_cl.cluster==k]['quality']
+
+          plt.figure(figsize=(14,6))
+          plt.imshow(wordcloud, interpolation="bilinear")
+          plt.axis("off")
+          st.subheader( "Cluster #" + str(k+1) + ", Number of Docs = " + str( numDocs )+ ", Avg. Doc Length = {:.2f}".format( avgLength )  )
+          st.pyplot(plt)
+          
+          import pandas
+          from collections import Counter
+
+          key_order= ['L', 'M', 'H']
+
+          plt.figure()
+          letter_counts = Counter(qualities)
+          ordered_letter_counts = {k: letter_counts[k] for k in key_order }
+          print( ordered_letter_counts )
+          df = pandas.DataFrame.from_dict(ordered_letter_counts, orient='index')
+          ax = df.plot.bar( legend=None )
+          ax.set_xlabel( "Document Quality")
+          ax.set_ylabel( "Number of Documents in Cluster #" + str(k+1))
+          st.pyplot( plt )
+          
+          
+

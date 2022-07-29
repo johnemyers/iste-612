@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt2
 import advertools as adv
 import pandas as pd
 import numpy as np
+from collections import Counter
 
 #TODO Add some logic here.
 #nltk.download('wordnet')
@@ -25,6 +26,7 @@ dict = {''}
 st.session_state.pdf_lst = []
 st.session_state.titles = []
 st.session_state.counts = []
+st.session_state.quality = []
 
 st.session_state.dfAllData = pd.DataFrame()
 
@@ -47,10 +49,18 @@ for uploaded_file in uploaded_files:
         dict.add(w.lower())
     # extracting text from page
     if wordCount > 2:
+        quality = 'N'
         st.session_state.pdf_lst.append(docString)
         st.session_state.titles.append(uploaded_file.name)
         st.session_state.counts.append(wordCount)
-        print( uploaded_file.name + " " + str(wordCount ) )
+        if wordCount < 100:
+          quality = 'L'
+        elif wordCount < 1000:
+          quality = 'M'
+        else:
+          quality = 'H'
+        st.session_state.quality.append( quality )
+        print( uploaded_file.name + " " + str(wordCount ) + str( quality ) )
 
     process_progress.progress( fileNum/length )
     fileNum += 1
@@ -88,6 +98,18 @@ if readInFiles:
   
   plt2.tight_layout()  # pad=1.08, h_pad=None, w_pad=None, rect=None)
   
+  st.pyplot( plt2 )
+  
+  key_order= ['L', 'M', 'H']
+  
+  plt2.figure()
+  letter_counts = Counter(st.session_state.quality)
+  ordered_letter_counts = {k: letter_counts[k] for k in key_order }
+  print( ordered_letter_counts )
+  df = pd.DataFrame.from_dict(ordered_letter_counts, orient='index')
+  ax = df.plot.bar( legend=None )
+  ax.set_xlabel( "Document Quality")
+  ax.set_ylabel( "Number of Documents in Collection")
   st.pyplot( plt2 )
 
 
