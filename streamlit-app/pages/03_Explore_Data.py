@@ -49,7 +49,7 @@ if ready:
     maxK = 20
   K = range(2, maxK+1)
   for k in K:
-      km = KMeans(n_clusters=k, max_iter=200, n_init=10)
+      km = KMeans(n_clusters=k, max_iter=100, n_init=40)
       km = km.fit(X)
       label=km.predict(X)
       Silhouette_scores.append( silhouette_score(X, label) )
