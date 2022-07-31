@@ -5,6 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 
+plt.rcParams.update({'figure.max_open_warning': 0})
+
 st.sidebar.image( "./images/explore.png", use_column_width=True)
 st.sidebar.write('<style>body { margin: 0; font-family: Arial, Helvetica, sans-serif;} .header{padding: 10px 16px; background: #555; color: #f1f1f1; position:fixed;top:0;} .sticky { position: fixed; top: 0; width: 100%;} </style><div class="header" id="myHeader">FOIA Document Analysis</div>', unsafe_allow_html=True)
 
@@ -73,11 +75,12 @@ if ready:
   true_k = st.slider( "Number of Clusters", min_value=0, max_value=maxK, value=0 )
 
   if st.button("Calculate") and true_k > 0:
+      print( "Cluster#,NumDocs,LowDocs,MedDocs,HighDocs,AvgWords")
       model = KMeans(n_clusters=true_k, init='k-means++')
       model.fit(X)
       labels=model.labels_
       wiki_cl=pd.DataFrame(list(zip(st.session_state.titles,st.session_state.counts,st.session_state.quality,labels)),columns=['title','count','quality','cluster'])
-      print(wiki_cl.sort_values(by=['cluster']))
+      #print(wiki_cl.sort_values(by=['cluster']))
       
       from wordcloud import WordCloud
       result={'cluster':labels,'wiki':st.session_state.pdf_lst}
@@ -89,12 +92,16 @@ if ready:
           text=text.lower()
           text=' '.join([word for word in text.split()])
           wordcloud = WordCloud(width=800, height=400, max_words=80, background_color="white").generate(text)
-          print('Cluster: {}'.format(k))
+          #print('Cluster: {}'.format(k))
+          
           titles=wiki_cl[wiki_cl.cluster==k]['title']
           numDocs = len(titles)
           
+          #print( "Number of Documents: " + str( numDocs ))
           counts=wiki_cl[wiki_cl.cluster==k]['count']
           avgLength = sum(counts) / numDocs
+          
+          #print( "Average Length: " + str( avgLength ))
           
           qualities=wiki_cl[wiki_cl.cluster==k]['quality']
 
@@ -112,11 +119,15 @@ if ready:
           plt.figure()
           letter_counts = Counter(qualities)
           ordered_letter_counts = {k: letter_counts[k] for k in key_order }
-          print( ordered_letter_counts )
+          #print( "Document Quality: " + str(ordered_letter_counts) )
           df = pandas.DataFrame.from_dict(ordered_letter_counts, orient='index')
           ax = df.plot.bar( legend=None )
           ax.set_xlabel( "Document Quality")
           ax.set_ylabel( "Number of Documents in Cluster #" + str(k+1))
+          
+          print( str(k+1) + "," + str(numDocs) + "," + str(ordered_letter_counts.get('L')) + "," + str(ordered_letter_counts.get('M')) + "," +  str(ordered_letter_counts.get('H')) + "," + str(avgLength) )
+          print( wiki_cl[wiki_cl.cluster==k]['title'] )
+          
           st.pyplot( plt )
           
           
